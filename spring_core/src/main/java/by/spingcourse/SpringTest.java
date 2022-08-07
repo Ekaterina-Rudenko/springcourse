@@ -20,8 +20,12 @@ public class SpringTest {
     /*MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
     musicPlayer.playMusic();*/
 
-    Computer computer = context.getBean("computer", Computer.class);
-    System.out.println(computer);
+    /*Computer computer = context.getBean("computer", Computer.class);
+    System.out.println(computer);*/
+
+    MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+    musicPlayer.playMusic(MusicGenre.CLASSICAL);
+    musicPlayer.playMusic(MusicGenre.ROCK);
     context.close();
   }
 }
