@@ -1,4 +1,4 @@
-package by.spingcourse;
+package by.springcourse;
 
 import java.util.List;
 

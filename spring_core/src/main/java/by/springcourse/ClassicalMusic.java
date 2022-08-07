@@ -1,7 +1,9 @@
-package by.spingcourse;
+package by.springcourse;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,5 +18,13 @@ public class ClassicalMusic implements Music {
   @Override
   public List<String> getSongs() {
     return songs;
+  }
+  @PostConstruct
+  public void doMyInit(){
+    System.out.println("Doing initialization");
+  }
+  @PreDestroy
+  public void doMyDestroy(){
+    System.out.println("Doing destruction");
   }
 }

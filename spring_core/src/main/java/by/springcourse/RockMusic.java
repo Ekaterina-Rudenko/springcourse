@@ -1,17 +1,16 @@
-package by.spingcourse;
+package by.springcourse;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class PopMusic implements Music{
+public class RockMusic implements Music{
   private List<String> songs = new ArrayList<>();
   {
-    songs.add("Under Pressure");
-    songs.add("Summer Moved On");
-    songs.add("All Good Things");
+    songs.add("Wind Cries Mary");
+    songs.add("Pieces");
+    songs.add("Your Last Song");
   }
   @Override
   public List<String> getSongs() {
