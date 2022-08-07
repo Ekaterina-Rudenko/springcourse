@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ClassicalMusic implements Music {
   private List<String> songs = new ArrayList<>();
   {
