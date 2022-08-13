@@ -11,6 +11,7 @@
 .idea/
 *.iml
 *.iws
+database.properties
 
 # Maven
 log/
