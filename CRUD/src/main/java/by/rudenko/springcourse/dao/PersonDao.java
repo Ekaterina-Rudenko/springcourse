@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,7 +27,11 @@ public class PersonDao {
     return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<>(Person.class));
   }
 
-  public Person show(int id) {
+  public Optional<Person> show(String email) {
+    return jdbcTemplate.query("Select * FROM person WHERE email=?", new Object[]{email},
+        new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
+  }
+    public Person show(int id) {
     String SQL = "SELECT * FROM person WHERE id=?";
     return jdbcTemplate.query(SQL, new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
         .stream().findAny().orElse(null);
