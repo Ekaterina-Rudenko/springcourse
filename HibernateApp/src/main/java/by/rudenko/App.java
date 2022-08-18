@@ -1,6 +1,7 @@
 package by.rudenko;
 
 import by.rudenko.model.Person;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,25 +17,18 @@ public class App {
     SessionFactory sessionFactory = configuration.buildSessionFactory();
     Session session = sessionFactory.getCurrentSession();
     try {
-      session.beginTransaction();
+session.beginTransaction();
+      //HQL
+      List<Person> personList = session.createQuery("select p from Person p where p.name LIKE 'K%'", Person.class).getResultList();
+      for(Person person : personList){
+        System.out.println(person);
+      }
 
-      /*Person person1 = new Person("Test1", 30);
-      Person person2 = new Person("Test2", 30);
-      Person person3 = new Person("Test3", 30);
-      session.save(person1);
-      session.save(person2);
-      session.save(person3);*/
+      session.createQuery("update Person set name='Mike' where age=27").executeUpdate();
 
-     /* Person person = session.get(Person.class, 2);
-      *//*person.setName("NEW NAME");*//*
-
-      session.delete(person);*/
-
-      Person person = new Person("Test 4", 33);
-      session.save(person);
-
+      session.createQuery("delete from Person where age=26").executeUpdate();
       session.getTransaction().commit();
-      System.out.println(person.getId());
+
     } finally {
       sessionFactory.close();
     }
