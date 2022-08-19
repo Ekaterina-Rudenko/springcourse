@@ -17,10 +17,11 @@ public class App {
     SessionFactory sessionFactory = configuration.buildSessionFactory();
     Session session = sessionFactory.getCurrentSession();
     try {
-session.beginTransaction();
+      session.beginTransaction();
       //HQL
-      List<Person> personList = session.createQuery("select p from Person p where p.name LIKE 'K%'", Person.class).getResultList();
-      for(Person person : personList){
+      List<Person> personList = session.createQuery("select p FROM Person p where p.name LIKE 'K%'",
+          Person.class).getResultList();
+      for (Person person : personList) {
         System.out.println(person);
       }
 
