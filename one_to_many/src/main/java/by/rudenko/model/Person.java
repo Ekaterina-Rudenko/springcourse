@@ -7,7 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "Person")
@@ -24,7 +27,8 @@ public class Person {
   @Column(name = "age")
   private int age;
 
-  @OneToMany(mappedBy = "owner")
+  @OneToMany(mappedBy = "owner"/*, cascade = CascadeType.PERSIST*/)//for persist
+  @Cascade(CascadeType.SAVE_UPDATE)//method save will be cascaded
   private List<Item> items;
 
   public Person() {
@@ -65,6 +69,13 @@ public class Person {
 
   public void setItems(List<Item> items) {
     this.items = items;
+  }
+  public void addItem(Item item){
+    if(this.items ==null){
+      this.items = new ArrayList<>();
+    }
+    this.items.add(item);
+    item.setOwner(this);
   }
 
   @Override

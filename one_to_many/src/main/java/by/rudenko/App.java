@@ -59,13 +59,19 @@ public class App {
       person.getItems().forEach(i -> i.setOwner(null));*/
 
       //new owner
-      Person person = session.get(Person.class, 4);
+      /*Person person = session.get(Person.class, 4);
       Item item = session.get(Item.class, 1);
 
       item.getOwner().getItems().remove(item);
       item.setOwner(person);//only this line effects db
-      person.getItems().add(item);
+      person.getItems().add(item);*/
 
+      Person person = new Person("Test cascading", 30);
+      person.addItem(new Item("item1"));
+      person.addItem(new Item("item2"));
+      person.addItem(new Item("item3"));
+
+      session.save(person);
 
       session.getTransaction().commit();
 
