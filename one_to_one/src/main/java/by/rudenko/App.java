@@ -21,11 +21,26 @@ public class App {
     try {
       session.beginTransaction();
 
-      Person newPerson = new Person("Test person", 45);
+      //add person AND passport
+      /*Person newPerson = new Person("Test person", 45);
       Passport passport = new Passport(123454);
       newPerson.setPassport(passport);
+      session.save(newPerson);*/
 
-      session.save(newPerson);
+      //get passport number through person
+/*      Person person = session.get(Person.class, 3);
+      System.out.println(person.getPassport().getPassportNumber());*/
+
+      //get person through passport
+    /*  Passport passport = session.get(Passport.class, 3);
+      System.out.println(passport.getPerson());*/
+
+      //Change passport number in DB
+     /* Person person = session.get(Person.class, 3);
+      person.getPassport().setPassportNumber(11111);*/
+
+      Person person = session.get(Person.class, 2);
+      person.setPassport(new Passport(123));
 
       session.getTransaction().commit();
     } finally {
