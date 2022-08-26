@@ -1,5 +1,6 @@
 package by.rudenko.services;
 
+import by.rudenko.models.Mood;
 import by.rudenko.models.Person;
 import by.rudenko.repository.PeopleRepository;
 import java.util.Date;
@@ -32,6 +33,7 @@ public class PeopleService {
   @Transactional
   public void save(Person person){
     person.setCreatedAt(new Date());
+    person.setMood(Mood.CALM);
     peopleRepository.save(person);
   }
 
