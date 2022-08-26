@@ -1,6 +1,5 @@
 package by.rudenko.models;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
