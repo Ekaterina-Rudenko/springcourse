@@ -1,6 +1,7 @@
 package by.rudenko.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -22,10 +23,10 @@ public class Person {
     @Column(name = "age")
     private int age;
 
-/*    @NotEmpty(message = "Email should not be empty")
+    @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     @Column(name = "email")
-    private String email;*/
+    private String email;
 
     public Person() {
 
@@ -60,11 +61,11 @@ public class Person {
         this.age = age;
     }
 
-/*    public String getEmail() {
+    public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }*/
+    }
 }

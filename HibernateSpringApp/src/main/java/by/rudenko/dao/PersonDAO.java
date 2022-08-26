@@ -10,33 +10,50 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class PersonDAO {
-    private final SessionFactory sessionFactory;
 
-    @Autowired
-    public PersonDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+  private final SessionFactory sessionFactory;
 
-    @Transactional(readOnly = true)
-    public List<Person> index() {
-        Session session = sessionFactory.getCurrentSession();
-        List<Person> people = session.createQuery("select p from Person p", Person.class)
-            .getResultList();
+  @Autowired
+  public PersonDAO(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 
-        return people;
-    }
+  @Transactional(readOnly = true)
+  public List<Person> index() {
+    Session session = sessionFactory.getCurrentSession();
+    List<Person> people = session.createQuery("select p from Person p", Person.class)
+        .getResultList();
 
+    return people;
+  }
 
-    public Person show(int id) {
-        return null;
-    }
+  @Transactional(readOnly = true)
+  public Person show(int id) {
+    Session session = sessionFactory.getCurrentSession();
+    Person person = session.get(Person.class, id);
+    return person;
+  }
 
-    public void save(Person person) {
-    }
+  @Transactional
+  public void save(Person person) {
+    Session session = sessionFactory.getCurrentSession();
+    session.save(person);
+  }
 
-    public void update(int id, Person updatedPerson) {
-    }
+  @Transactional
+  public void update(int id, Person updatedPerson) {
+    Session session = sessionFactory.getCurrentSession();
+    Person person = session.get(Person.class, id);
 
-    public void delete(int id) {
-    }
+    person.setName(updatedPerson.getName());
+    person.setAge(updatedPerson.getAge());
+    person.setEmail(updatedPerson.getEmail());
+  }
+
+  @Transactional
+  public void delete(int id) {
+    Session session = sessionFactory.getCurrentSession();
+    Person person = session.get(Person.class, id);
+    session.remove(person);
+  }
 }
