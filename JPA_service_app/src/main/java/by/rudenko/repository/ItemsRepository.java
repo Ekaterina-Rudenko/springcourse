@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemsRepository{
+public interface ItemsRepository extends JpaRepository<Item, Integer>{
 List<Item> findByItemName(String itemName);
 List<Item> findByOwner(Person owner);
 

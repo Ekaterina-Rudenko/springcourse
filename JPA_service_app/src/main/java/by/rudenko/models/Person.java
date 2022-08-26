@@ -88,8 +88,6 @@ public class Person {
             "id=" + id +
             ", name='" + name + '\'' +
             ", age=" + age +
-            ", email='" + email + '\'' +
-            ", items=" + items +
-            '}';
+            ", email='" + email + "}";
     }
 }
