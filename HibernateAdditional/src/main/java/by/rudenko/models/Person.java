@@ -1,6 +1,7 @@
 package by.rudenko.models;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -41,6 +42,9 @@ public class Person {
 
     @Enumerated(EnumType.ORDINAL)//можно String
     private Mood mood;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
 
 
     public Person() {
@@ -107,6 +111,61 @@ public class Person {
 
     public void setMood(Mood mood) {
         this.mood = mood;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Person)) {
+            return false;
+        }
+
+        Person person = (Person) o;
+
+        if (getId() != person.getId()) {
+            return false;
+        }
+        if (getAge() != person.getAge()) {
+            return false;
+        }
+        if (getName() != null ? !getName().equals(person.getName()) : person.getName() != null) {
+            return false;
+        }
+        if (getEmail() != null ? !getEmail().equals(person.getEmail())
+            : person.getEmail() != null) {
+            return false;
+        }
+        if (getDateOfBirth() != null ? !getDateOfBirth().equals(person.getDateOfBirth())
+            : person.getDateOfBirth() != null) {
+            return false;
+        }
+        if (getCreatedAt() != null ? !getCreatedAt().equals(person.getCreatedAt())
+            : person.getCreatedAt() != null) {
+            return false;
+        }
+        return getMood() == person.getMood();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + getAge();
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getDateOfBirth() != null ? getDateOfBirth().hashCode() : 0);
+        result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
+        result = 31 * result + (getMood() != null ? getMood().hashCode() : 0);
+        return result;
     }
 
     @Override
