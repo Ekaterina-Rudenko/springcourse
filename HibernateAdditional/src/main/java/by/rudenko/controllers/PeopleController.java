@@ -1,5 +1,6 @@
 package by.rudenko.controllers;
 
+import by.rudenko.dao.PersonDao;
 import by.rudenko.models.Person;
 import by.rudenko.services.PeopleService;
 import javax.validation.Valid;
@@ -19,15 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/people")
 public class PeopleController {
     private final PeopleService peopleService;
+    private final PersonDao personDao;
 
     @Autowired
-    public PeopleController(PeopleService peopleService){
+    public PeopleController(PeopleService peopleService, PersonDao personDao){
         this.peopleService = peopleService;
+        this.personDao = personDao;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("people", peopleService.findAll());
+        //model.addAttribute("people", peopleService.findAll());
+        personDao.testNPlus1();
         return "people/index";
     }
 
