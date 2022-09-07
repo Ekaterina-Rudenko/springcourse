@@ -2,6 +2,7 @@ package by.rudenko.FirstRestApp.services;
 
 import by.rudenko.FirstRestApp.models.Person;
 import by.rudenko.FirstRestApp.repositories.PeopleRepository;
+import by.rudenko.FirstRestApp.util.PersonNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PeopleService {
 
   public Person findOne(int id) {
     Optional<Person> foundPerson = peopleRepository.findById(id);
-    return foundPerson.orElse(null);
+    return foundPerson.orElseThrow(PersonNotFoundException::new);
   }
 
 
