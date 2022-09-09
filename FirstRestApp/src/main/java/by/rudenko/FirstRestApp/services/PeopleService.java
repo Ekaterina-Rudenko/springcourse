@@ -3,6 +3,7 @@ package by.rudenko.FirstRestApp.services;
 import by.rudenko.FirstRestApp.models.Person;
 import by.rudenko.FirstRestApp.repositories.PeopleRepository;
 import by.rudenko.FirstRestApp.util.PersonNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,14 @@ public class PeopleService {
 
   @Transactional
   public void save(Person person){
+    enrichPerson(person);
     peopleRepository.save(person);
   }
 
+  private void enrichPerson(Person person) {
+    person.setCreatedAt(LocalDateTime.now());
+    person.setUpdatedAt(LocalDateTime.now());
+    person.setCreatedWho("ADMIN");
+  }
 
 }
